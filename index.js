@@ -266,6 +266,7 @@ async function getEntryToken() {
             }
         });
         const { data } = response.data;
+        console.log(data);
         const payload = {
             entryId: data.entry.id,
             attempId: data.attemptId,
