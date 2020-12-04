@@ -242,7 +242,7 @@ async function attemptTask(arguments) {
             console.error(response.data);
             totalPoints.push(response.data.data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
-                getEntryToken();
+                setTimeout(() => getEntryToken(), 2000);
             } else {
                 console.log(totalPoints);
             }
@@ -266,7 +266,6 @@ async function getEntryToken() {
             }
         });
         const { data } = response.data;
-        console.log(response);
         const payload = {
             entryId: data.entry.id,
             attempId: data.attemptId,
