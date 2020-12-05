@@ -251,7 +251,7 @@ async function attemptTask(arguments) {
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => getEntryToken(), 8000);
             } else {
-                console.log(totalPoints);
+                console.log(totalPoints.sort(function(a, b){return a-b}));
             }
         }
     } catch(error) {
