@@ -229,7 +229,7 @@ async function attemptTask(arguments) {
                 ...form.getHeaders()
             }
         });
-        console.log(response.data.data.isSuccess);
+        //console.log(response.data.data.isSuccess);
         if (response.data.data.isSuccess && response.data.data.nextTask) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
