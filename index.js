@@ -168,7 +168,7 @@ const methodMappers = {
             let freqDist;
 
             x.forEach(a => {
-                if (freq[a]) {
+                if (!!freq[a]) {
                     freq[a] += 1
                 } else {
                     freq[a] = 1
