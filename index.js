@@ -4,7 +4,7 @@ const FormData = require('form-data');
 const BASE_URL = 'https://speedcoding.toptal.com';
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    Cookie: '__cfduid=d6253ca3d67ee0d86688eb058bebd9d621607095786; PHPSESSID=118e6d249d3e87d85404d64155ca8c2f; _ga=GA1.2.1291478384.1607095796; _gid=GA1.2.2112274456.1607095796; _gat_gtag_UA_153788370_1=1',
+    Cookie: '__cfduid=d44d167765242165b4e5e452c4270e2601607152329; PHPSESSID=3e55fde356ecd9e0b55e11ada820135e; _ga=GA1.2.234493384.1607152333; _gid=; _gat_gtag_UA_153788370_1=1',
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
@@ -165,6 +165,8 @@ const methodMappers = {
     'Most Frequent': {
         method: (x) => {
             let freq = {}
+            let freqDist;
+
             x.forEach(a => {
                 if (freq[a]) {
                     freq[a] += 1
@@ -172,7 +174,15 @@ const methodMappers = {
                     freq[a] = 1
                 }
             }) 
-            return parseInt(Object.keys(freq).reduce((a, b) => freq[a] > freq[b] ? a : b)) 
+
+            for (let key in freq) {
+                if (!!freqDist && freqDist.value < freq[key]) {
+                    freqDist = {key: parseInt(key), value: freq[key]}
+                } else if (!(!!freqDist)) {
+                    freqDist = {key: parseInt(key), value: freq[key]}
+                }
+            }
+            return freqDist.key;
         },
         code: `.`,
         result: {"test1":1,"test2":0,"test4":-1,"test3":0,"test5":1,"rnd_nrw_Adolphus":1680,"rnd_gnb_Meghan":1365,"rnd_xpa_Isaiah":2088,"rnd_axr_Grover":false,"rnd_hna_Novella":false,"rnd_jgn_Polly":false,"rnd_eqg_Wilbert":41095.3056,"rnd_gou_Genesis":28178.1654,"rnd_rpz_Dalton":4106.0736,"rnd_odo_Misael":[],"rnd_exs_Robb":[808],"rnd_ygn_Elsa":[416,586],"test_1":3602717.0935,"test_2":303736.3531,"test_3":1317.0897,"test_4":185822.5414,"test_5":1057401.3101,"test_6":634264.2545,"rnd_tgj_Leonora":3490257.5851,"rnd_sfu_Florencio":5131.4481,"rnd_ybm_Mackenzie":95949.7018,"test6":1,"test7":-1,"test8":0,"test9":1,"rnd_pqm_Kamille":[0,4,6,16,18,20],"rnd_jyh_Aglae":[2,4,8,10,14,20,22,26],"rnd_kmg_Maximus":[2,6,8,10,14,16,18,24,28,30,32],"flat":[0,1,2],"empty":"","nested1":[0,1],"nested2":[0,1,2,3,4,5],"mixed":"fLiRpYdUCK","all_lowercase":"FUNKEY MONKEY","all_uppercase":"monkey magic","rnd_pku_Will":"VOLUPTAS RATIONE","rnd_jnd_Cynthia":"EIUS 6I EXCEPTURI ullam SOLUTA VOLUPTAS neque EOS AUT cumque","rnd_ewx_Robb":"SIT","test10":-1,"rnd_pas_Brock":-1,"rnd_jqe_Liam":-1,"rnd_owc_Perry":1,"few":1,"mix":5,"mix2":3,"zero":0,"rnd_ywv_Joshuah":862,"rnd_syr_Axel":494,"rnd_ocp_Colten":362},
