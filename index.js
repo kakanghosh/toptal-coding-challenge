@@ -167,21 +167,18 @@ const methodMappers = {
             let freq = {}
             let freqDist;
 
-            x.forEach(a => {
-                if (!!freq[a]) {
-                    freq[a] += 1
+            x.forEach(key => {
+                if (!!freq[key]) {
+                    freq[key] += 1
                 } else {
-                    freq[a] = 1
+                    freq[key] = 1
                 }
-            }) 
-
-            for (let key in freq) {
                 if (!!freqDist && freqDist.value < freq[key]) {
                     freqDist = {key: parseInt(key), value: freq[key]}
                 } else if (!(!!freqDist)) {
                     freqDist = {key: parseInt(key), value: freq[key]}
                 }
-            }
+            })
             return freqDist.key;
         },
         code: `.`,
