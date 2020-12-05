@@ -8,7 +8,7 @@ const headers = {
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
-let MAX_ATTEMP = 5;
+let MAX_ATTEMP = 10;
 const totalPoints = [];
 
 const methodMappers = {
