@@ -15,8 +15,6 @@ const headers = {
 let attempCount = 0;
 let MAX_ATTEMP = 10;
 const totalPoints = [];
-let skipping = [];
-let calculating = [];
 
 async function attemptTask(arguments) {
     try {
@@ -40,10 +38,8 @@ async function attemptTask(arguments) {
                 arguments.attempId = data.attemptId;
                 for(const property in tests_json) {
                     if (!!tests_json[property].result) {
-                        //skipping.push('Skipping for ' + data.nextTask.title);
                         arguments.testsJson[property] = tests_json[property].result;
                     } else {
-                        //calculating.push('Calculating for ' + data.nextTask.title);
                         let argument = tests_json[property].args[0];
                         let result = methodMapper.method(argument);
                         arguments.testsJson[property] = result;
@@ -57,9 +53,6 @@ async function attemptTask(arguments) {
             }
         } else {
             console.log(response.data);
-            //console.log(skipping);
-            //console.log(calculating);
-            //skipping = calculating = [];
             totalPoints.push(response.data.data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => doIt(), 8000);
@@ -104,10 +97,8 @@ async function doIt() {
     const methodMapper = methodMappers[data.nextTask.title];
     for(const property in tests_json) {
         if (!!tests_json[property].result) {
-            //skipping.push('Skipping for ' + data.nextTask.title);
             payload.testsJson[property] = tests_json[property].result;
         } else {
-            //calculating.push('Calculating for ' + data.nextTask.title);
             payload.testsJson[property] = methodMapper.method(tests_json[property].args[0]);
         }
     }
