@@ -79,36 +79,39 @@ async function getEntryToken() {
         form.append('email', '');
         form.append('leaderboardName', 'Ghosh');
         form.append('countryAlpha2', 'BD');
-        const response = await axios.post(`${BASE_URL}/webappApi/entry?ch=22&acc=1024`, form, {
+        return await axios.post(`${BASE_URL}/webappApi/entry?ch=22&acc=1024`, form, {
             headers: {
                 ...headers,
                 ...form.getHeaders()
             }
         });
-        const { data } = response.data;
-        const payload = {
-            entryId: data.entry.id,
-            attempId: data.attemptId,
-            entryKey: data.entry.entry_key,
-            testsJson: {},
-            code: '',
-        };
-        const {tests_json} = data.nextTask;
-        const methodMapper = methodMappers[data.nextTask.title];
-        for(const property in tests_json) {
-            if (!!tests_json[property].result) {
-                //skipping.push('Skipping for ' + data.nextTask.title);
-                payload.testsJson[property] = tests_json[property].result;
-            } else {
-                //calculating.push('Calculating for ' + data.nextTask.title);
-                payload.testsJson[property] = methodMapper.method(tests_json[property].args[0]);
-            }
-        }
-        payload.code = methodMapper.code;
-        attemptTask(payload);
     } catch(error) {
         console.error(error);
     }
 }
 
-getEntryToken();
+(async function() {
+    let response = await getEntryToken();
+    const { data } = response.data;
+    const payload = {
+        entryId: data.entry.id,
+        attempId: data.attemptId,
+        entryKey: data.entry.entry_key,
+        testsJson: {},
+        code: '',
+    };
+    const {tests_json} = data.nextTask;
+    const methodMapper = methodMappers[data.nextTask.title];
+    for(const property in tests_json) {
+        if (!!tests_json[property].result) {
+            //skipping.push('Skipping for ' + data.nextTask.title);
+            payload.testsJson[property] = tests_json[property].result;
+        } else {
+            //calculating.push('Calculating for ' + data.nextTask.title);
+            payload.testsJson[property] = methodMapper.method(tests_json[property].args[0]);
+        }
+    }
+    payload.code = methodMapper.code;
+    attemptTask(payload);
+})()
+
