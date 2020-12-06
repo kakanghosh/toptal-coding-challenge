@@ -10,6 +10,8 @@ const headers = {
 let attempCount = 0;
 let MAX_ATTEMP = 10;
 const totalPoints = [];
+let skipping = [];
+let calculating = [];
 
 const methodMappers = {
     'Number To String': {
@@ -243,9 +245,11 @@ async function attemptTask(arguments) {
             if (methodMapper) {
                 arguments.attempId = data.attemptId;
                 for(const property in tests_json) {
-                    if (tests_json[property].result) {
+                    if (!!tests_json[property].result) {
+                        //skipping.push('Skipping for ' + data.nextTask.title);
                         arguments.testsJson[property] = tests_json[property].result;
                     } else {
+                        //calculating.push('Calculating for ' + data.nextTask.title);
                         arguments.testsJson[property] = methodMapper.method(tests_json[property].args[0]);
                     }
                 }
@@ -256,7 +260,10 @@ async function attemptTask(arguments) {
                 console.log(response.data);
             }
         } else {
-            console.error(response.data);
+            console.log(response.data);
+            //console.log(skipping);
+            //console.log(calculating);
+            //skipping = calculating = [];
             totalPoints.push(response.data.data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => getEntryToken(), 8000);
@@ -293,9 +300,11 @@ async function getEntryToken() {
         const {tests_json} = data.nextTask;
         const methodMapper = methodMappers[data.nextTask.title];
         for(const property in tests_json) {
-            if (tests_json[property].result) {
+            if (!!tests_json[property].result) {
+                //skipping.push('Skipping for ' + data.nextTask.title);
                 payload.testsJson[property] = tests_json[property].result;
             } else {
+                //calculating.push('Calculating for ' + data.nextTask.title);
                 payload.testsJson[property] = methodMapper.method(tests_json[property].args[0]);
             }
         }
