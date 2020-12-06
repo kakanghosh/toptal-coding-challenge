@@ -4,7 +4,7 @@ const FormData = require('form-data');
 const BASE_URL = 'https://speedcoding.toptal.com';
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    Cookie: '__cfduid=da4d0c39d490abc16cdd6e20e08588db41607185009; PHPSESSID=7101fc25e4f493cfed9ffe799d8decfb; _ga=GA1.2.2142084295.1607185012; _gid=GA1.2.243984589.1607185012; _gat_gtag_UA_153788370_1=1',
+    Cookie: '__cfduid=dfe672adb53209b303ca0ab4132a35b7a1607227596; PHPSESSID=bf0a4c886f934f487ca0a6114c64677b; _ga=GA1.2.1639154922.1607227598; _gid=GA1.2.1098306433.1607227598; _gat_gtag_UA_153788370_1=1',
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
