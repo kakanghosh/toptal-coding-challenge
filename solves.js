@@ -208,6 +208,17 @@ const methodMappers = {
         code: '.',
         memo: {},
     },
+    'Reverse String': {
+        method: (x) => {
+            let result = '';
+            for(let i = x.length - 1; i >= 0; i--) {
+                result += x[i];
+            }
+            return result;
+        },
+        code: '.',
+        memo: {},
+    },
 }
 
 module.exports = methodMappers;
