@@ -41,8 +41,15 @@ async function attemptTask(arguments) {
                         arguments.testsJson[property] = tests_json[property].result;
                     } else {
                         let argument = tests_json[property].args[0];
-                        let result = methodMapper.method(argument);
-                        arguments.testsJson[property] = result;
+                        let foundMemo = methodMapper.memo[argument];
+                        if (!!foundMemo) {
+                            arguments.testsJson[property] = foundMemo;
+                        } else {
+                            let result = methodMapper.method(argument);
+                            arguments.testsJson[property] = result;
+                            methodMapper.memo[argument] = result;
+                        }
+                        
                     }
                 }
                 arguments.code = methodMapper.code;
