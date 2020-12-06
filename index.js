@@ -252,15 +252,8 @@ async function attemptTask(arguments) {
                     } else {
                         //calculating.push('Calculating for ' + data.nextTask.title);
                         let argument = tests_json[property].args[0];
-                        if (!!methodMapper.memo[argument]) {
-                            //console.log('using memo :D ', argument, methodMapper.memo[argument]);
-                            arguments.testsJson[property] = methodMapper.memo[argument];
-                        } else {
-                            let result = methodMapper.method(argument);
-                            arguments.testsJson[property] = result;
-                            methodMapper.memo[argument] = result;
-                        }
-                        
+                        let result = methodMapper.method(argument);
+                        arguments.testsJson[property] = result;
                     }
                 }
                 arguments.code = methodMapper.code;
