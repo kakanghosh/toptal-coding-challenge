@@ -29,7 +29,7 @@ async function attemptTask(arguments) {
                 ...form.getHeaders()
             }
         });
-        //console.log(response.data.data.isSuccess);
+        // console.log(response.data.data.isSuccess);
         if (response.data.data.isSuccess && response.data.data.nextTask) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
@@ -41,8 +41,19 @@ async function attemptTask(arguments) {
                         arguments.testsJson[property] = tests_json[property].result;
                     } else {
                         let argument = tests_json[property].args[0];
-                        let result = methodMapper.method(argument);
-                        arguments.testsJson[property] = result;
+                        if (!Array.isArray(argument)) {
+                            if (argument in methodMapper.memo) {
+                                arguments.testsJson[property] = methodMapper.memo[argument];
+                            } else {
+                                let result = methodMapper.method(argument);
+                                arguments.testsJson[property] = result;
+                                methodMapper.memo[argument] = result;
+                            }
+                        } else {
+                            let result = methodMapper.method(argument);
+                            arguments.testsJson[property] = result;
+                        }
+                        
                     }
                 }
                 arguments.code = methodMapper.code;
