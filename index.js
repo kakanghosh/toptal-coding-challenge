@@ -18,49 +18,49 @@ const methodMappers = {
         method: (x) => {
             return x.toString()
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Triple': {
         method: (x) => {
             return x * 3
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Float To int': {
         method: (x) => {
             return parseInt(x)
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Is Odd': {
         method: (x) => {
             return x % 2 == 1
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Square Root': {
         method: (x) => {
             return Math.sqrt(x)
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Surface Area of a Cube': {
         method: (x) => {
             return parseFloat((6 * x *x).toFixed(4))
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'String to Number': {
         method: (x) => {
             return parseFloat(x)
         },
-        code: `a`,
+        code: `.`,
         memo: {},
     },
     'Remove first 3 elements on array': {
