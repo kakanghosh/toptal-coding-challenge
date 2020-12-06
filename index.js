@@ -31,7 +31,7 @@ async function attemptTask(arguments) {
                 ...form.getHeaders()
             }
         });
-        //console.log(response.data.data.isSuccess);
+        console.log(response.data.data.isSuccess);
         if (response.data.data.isSuccess && response.data.data.nextTask) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
@@ -62,7 +62,7 @@ async function attemptTask(arguments) {
             //skipping = calculating = [];
             totalPoints.push(response.data.data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
-                setTimeout(() => getEntryToken(), 8000);
+                setTimeout(() => doIt(), 8000);
             } else {
                 console.log(totalPoints.sort(function(a, b){return a-b}));
             }
@@ -90,7 +90,7 @@ async function getEntryToken() {
     }
 }
 
-(async function() {
+async function doIt() {
     let response = await getEntryToken();
     const { data } = response.data;
     const payload = {
@@ -113,5 +113,6 @@ async function getEntryToken() {
     }
     payload.code = methodMapper.code;
     attemptTask(payload);
-})()
+}
 
+doIt();
