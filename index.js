@@ -2,9 +2,13 @@ const axios = require('axios');
 const FormData = require('form-data');
 
 const BASE_URL = 'https://speedcoding.toptal.com';
+const CFUUID = 'defb954f10efe9de517b143c4d7f2f12e1607269829';
+const PHPSESSID = '7233851168d71d46d188be2435a6c30a';
+const GA = 'GA1.2.1904510360.1607269833';
+const GID = 'GA1.2.1991834392.1607269833';
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    Cookie: '__cfduid=dfe672adb53209b303ca0ab4132a35b7a1607227596; PHPSESSID=bf0a4c886f934f487ca0a6114c64677b; _ga=GA1.2.1639154922.1607227598; _gid=GA1.2.1098306433.1607227598; _gat_gtag_UA_153788370_1=1',
+    Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}; _ga=${GA}; _gid=${GID}; _gat_gtag_UA_153788370_1=1`,
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
@@ -238,7 +242,7 @@ async function attemptTask(arguments) {
                 ...form.getHeaders()
             }
         });
-        //console.log(response.data.data.isSuccess);
+        console.log(response.data.data.isSuccess);
         if (response.data.data.isSuccess && response.data.data.nextTask) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
