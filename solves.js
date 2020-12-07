@@ -214,6 +214,22 @@ const methodMappers = {
         code: '.',
         memo: {},
     },
+    'Swap Halves': {
+        method: (x) => {
+            let firstHalf = '';
+            let secondHalf = '';
+            for(let i = 0; i < x.length; i++) {
+                if (i < Math.floor(x.length / 2)) {
+                    firstHalf += x[i];
+                } else {
+                    secondHalf += x[i];
+                }
+            }
+            return `${secondHalf}${firstHalf}`
+        },
+        code: '.',
+        memo: {}
+    },
 }
 
 module.exports = methodMappers;
