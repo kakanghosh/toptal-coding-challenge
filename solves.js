@@ -174,21 +174,16 @@ const methodMappers = {
     'Has Balance Points': {
         method: (x) => {
             if (x.length > 0) {
+                const y = []
+                let count = 0
                 for(let i in x) {
-                    let sumBefore = 0;
-                    for (let j = 0; j < i; j++) {
-                        sumBefore += x[j];
+                    count += x[i]
+                    y.push(count)
+                }
+                for(let i in y) {
+                    if (y[i] * 2 == y[y.length - 1]) {
+                        return true;
                     }
-                    let sumAfter = 0;
-                    for (let j = i; j < x.length; j++) {
-                        sumAfter += x[j];
-                        if (sumAfter > sumBefore) {
-                            break;
-                        }
-                    }
-                  if (sumBefore === sumAfter) {
-                    return true;
-                  }
                 }
               } else{
                 return true;
