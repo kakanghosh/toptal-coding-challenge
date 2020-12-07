@@ -1,6 +1,9 @@
+var http = require('http');
 const axios = require('axios');
 const FormData = require('form-data');
 const methodMappers = require('./solves');
+
+const server = http.createServer(function (request, response) {}).listen(process.env.PORT || 8080);
 
 const BASE_URL = 'https://speedcoding.toptal.com';
 const CFUUID = 'defb954f10efe9de517b143c4d7f2f12e1607269829';
@@ -13,7 +16,7 @@ const headers = {
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
-let MAX_ATTEMP = 20;
+let MAX_ATTEMP = 1;
 const totalPoints = [];
 
 async function attemptTask(arguments) {
@@ -29,7 +32,7 @@ async function attemptTask(arguments) {
                 ...form.getHeaders()
             }
         });
-        //console.log(response.data.data.isSuccess);
+        // console.log(response.data.data.isSuccess);
         if (response.data.data.isSuccess && response.data.data.nextTask) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
@@ -43,7 +46,7 @@ async function attemptTask(arguments) {
                         let argument = tests_json[property].args[0];
                         let getMemo = methodMapper.memo[argument];
                         if (getMemo != undefined) {
-                            //console.log('Using memo :D - ' + argument);
+                            // console.log('Using memo :D - ' + argument);
                             arguments.testsJson[property] = getMemo;
                         } else {
                             let result = methodMapper.method(argument);
@@ -64,6 +67,7 @@ async function attemptTask(arguments) {
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => doIt(), 8000);
             } else {
+                server.close();
                 console.log(totalPoints.sort(function(a, b){return a-b}));
             }
         }
