@@ -11,21 +11,21 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+    # strategy:
+    #   matrix:
+    #     node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm i
-    - run: node index.js
-    # - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v1
     #   with:
-    #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-    #     heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-    #     heroku_email: "kakanghosh69@gmail.com"
-    #     usedocker: tru
+    #     node-version: ${{ matrix.node-version }}
+    # - run: npm i
+    # - run: node index.js
+    - uses: akhileshns/heroku-deploy@v3.5.7 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+        heroku_email: "kakanghosh69@gmail.com"
+        usedocker: tru
