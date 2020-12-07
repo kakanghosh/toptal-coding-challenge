@@ -4,7 +4,7 @@ const methodMappers = require('./solves');
 
 const BASE_URL = 'https://speedcoding.toptal.com';
 const CFUUID = 'defb954f10efe9de517b143c4d7f2f12e1607269829';
-const PHPSESSID = '7233851168d71d46d188be2435a6c30a';
+const PHPSESSID = 'ef8f47d02380a1651bc6945facf75dd4';
 const GA = 'GA1.2.1904510360.1607269833';
 const GID = 'GA1.2.1991834392.1607269833';
 const headers = {
