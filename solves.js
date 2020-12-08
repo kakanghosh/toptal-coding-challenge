@@ -230,6 +230,21 @@ const methodMappers = {
         code: '.',
         memo: {}
     },
+    'Longest String': {
+        method: (x) => {
+            let longest = x[0];
+            if (x.length > 1) {
+                for(let i = 1; i < x.length; i++) {
+                    if (x[i].length > longest.length) {
+                        longest = x[i];
+                    }
+                }
+            }
+            return longest
+        },
+        code: '.',
+        memo: {}
+    }
 }
 
 module.exports = methodMappers;
