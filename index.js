@@ -12,12 +12,13 @@ const GA = 'GA1.2.1904510360.1607269833';
 const GID = 'GA1.2.1991834392.1607269833';
 const FBP = 'fb.1.1607315228567.510057450';
 const UETSID = '77edd330384411eb9efee90a239dd8bb';
+const UETVID = '77ee3530384411eb88fe7340deb9a410';
 const HUBSPOTUTK = '7aa63578239fb01ed3be31efcb34bfa5';
 const HSTC = '6380845.7aa63578239fb01ed3be31efcb34bfa5.1607315231772.1607315231772.1607315231772.1';
 
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}; _ga=${GA}; _gid=${GID}; _fbp=${FBP}; _uetsid=${UETSID}; __hstc=${HSTC}; hubspotutk=${HUBSPOTUTK}; hubspotutk=1; _gat_gtag_UA_153788370_1=1`,
+    Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}; _ga=${GA}; _gid=${GID}; _fbp=${FBP}; _uetsid=${UETSID}; _uetvid=${UETVID}; __hstc=${HSTC}; hubspotutk=${HUBSPOTUTK}; hubspotutk=1; _gat_gtag_UA_153788370_1=1`,
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
