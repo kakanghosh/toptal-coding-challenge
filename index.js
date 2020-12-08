@@ -50,15 +50,17 @@ async function attemptTask(arguments) {
                         arguments.testsJson[property] = tests_json[property].result;
                     } else {
                         let argument = tests_json[property].args[0];
-                        let getMemo = methodMapper.memo[argument];
-                        if (getMemo != undefined) {
-                            // console.log('Using memo :D - ' + argument);
-                            arguments.testsJson[property] = getMemo;
-                        } else {
-                            let result = methodMapper.method(argument);
-                            arguments.testsJson[property] = result;
-                            methodMapper.memo[argument] = result;
-                        }
+                        // let getMemo = methodMapper.memo[argument];
+                        // if (getMemo != undefined) {
+                        //     // console.log('Using memo :D - ' + argument);
+                        //     arguments.testsJson[property] = getMemo;
+                        // } else {
+                        //     let result = methodMapper.method(argument);
+                        //     arguments.testsJson[property] = result;
+                        //     methodMapper.memo[argument] = result;
+                        // }
+                        let result = methodMapper.method(argument);
+                        arguments.testsJson[property] = result;
                     }
                 }
                 arguments.code = methodMapper.code;
