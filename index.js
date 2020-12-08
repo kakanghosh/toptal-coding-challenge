@@ -6,10 +6,10 @@ const methodMappers = require('./solves');
 const server = http.createServer(function (request, response) {}).listen(process.env.PORT || 8080);
 
 const BASE_URL = 'https://speedcoding.toptal.com';
-const CFUUID = 'defb954f10efe9de517b143c4d7f2f12e1607269829';
-const PHPSESSID = '908f2a6ef7a5ca96feda54f7841bc203';
-const GA = 'GA1.2.1904510360.1607269833';
-const GID = 'GA1.2.1991834392.1607269833';
+const CFUUID = 'd289ca26a1bb1adb0c9fd84e2545703231607442066';
+const PHPSESSID = '585be64a61e14b839d43b07244766ed0';
+const GA = 'GA1.2.915148913.1607442073';
+const GID = 'GA1.2.1912215665.1607442073';
 const FBP = 'fb.1.1607315228567.510057450';
 const UETSID = '77edd330384411eb9efee90a239dd8bb';
 const UETVID = '77ee3530384411eb88fe7340deb9a410';
