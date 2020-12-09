@@ -50,12 +50,9 @@ async function attemptTask(arguments) {
             const { tests_json } = data.nextTask;
             const methodMapper = methodMappers[data.nextTask.title];
             //console.log(data.nextTask);
-            if (methodMapper) {
+            if (!!methodMapper) {
                 arguments.attempId = data.attemptId;
-                arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => {
-                    let argument = value.args[0];
-                    return [key, value.result || methodMapper.memo[argument] || cachingResult(methodMapper, argument) ];
-                }));
+                arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.memo[value.args[0]]]));
                 arguments.code = methodMapper.code;
                 attemptTask(arguments);
             } else {
