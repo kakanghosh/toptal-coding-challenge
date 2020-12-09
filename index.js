@@ -38,7 +38,7 @@ async function attemptTask(data) {
         const form = {
             attempt_id: data.attemptId,
             entry_key: ENTRY_KEY,
-            tests_json: JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.method(value.args[0])] ))),
+            tests_json: JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.memo[value.args[0]] || cachingResult(methodMapper, value.args[0])] ))),
             code: methodMapper.code,
         }
         const options = {
