@@ -50,9 +50,9 @@ async function attemptTask(arguments) {
             const { tests_json } = data.nextTask;
             const methodMapper = methodMappers[data.nextTask.title];
             //console.log(data.nextTask);
-            if (!!methodMapper) {
+            if (methodMapper) {
                 arguments.attempId = data.attemptId;
-                arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.memo[value.args[0]]]));
+                arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.method(value.args[0])] ));
                 arguments.code = methodMapper.code;
                 attemptTask(arguments);
             } else {
