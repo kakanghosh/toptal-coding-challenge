@@ -25,6 +25,12 @@ let attempCount = 0;
 let MAX_ATTEMP = 25;
 const totalPoints = [];
 
+let cachingResult = (methodMapper, arg) => {
+    let result = methodMapper.method(arg);
+    methodMapper.memo[arg] = result;
+    return result;
+}
+
 async function attemptTask(arguments) {
     try {
         const form = new FormData();
@@ -46,25 +52,9 @@ async function attemptTask(arguments) {
             //console.log(data.nextTask);
             if (methodMapper) {
                 arguments.attempId = data.attemptId;
-                
-                // for(const property in tests_json) {
-                //     if (!!tests_json[property].result) {
-                //         arguments.testsJson[property] = tests_json[property].result;
-                //     } else {
-                //         let argument = tests_json[property].args[0];
-                //         let getMemo = methodMapper.memo[argument];
-                //         if (getMemo != undefined) {
-                //             // console.log('Using memo :D - ' + argument);
-                //             arguments.testsJson[property] = getMemo;
-                //         } else {
-                //             let result = methodMapper.method(argument);
-                //             arguments.testsJson[property] = result;
-                //             methodMapper.memo[argument] = result;
-                //         }
-                //     }
-                // }
                 arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => {
-                    return [key, value.result || methodMapper.method(value.args[0]) ];
+                    let argument = value.args[0];
+                    return [key, value.result || methodMapper.memo[argument] || cachingResult(methodMapper, argument) ];
                 }));
                 arguments.code = methodMapper.code;
                 attemptTask(arguments);
