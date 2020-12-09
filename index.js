@@ -43,24 +43,29 @@ async function attemptTask(arguments) {
             const { data } = response.data;
             const { tests_json } = data.nextTask;
             const methodMapper = methodMappers[data.nextTask.title];
+            //console.log(data.nextTask);
             if (methodMapper) {
                 arguments.attempId = data.attemptId;
-                for(const property in tests_json) {
-                    if (!!tests_json[property].result) {
-                        arguments.testsJson[property] = tests_json[property].result;
-                    } else {
-                        let argument = tests_json[property].args[0];
-                        let getMemo = methodMapper.memo[argument];
-                        if (getMemo != undefined) {
-                            // console.log('Using memo :D - ' + argument);
-                            arguments.testsJson[property] = getMemo;
-                        } else {
-                            let result = methodMapper.method(argument);
-                            arguments.testsJson[property] = result;
-                            methodMapper.memo[argument] = result;
-                        }
-                    }
-                }
+                
+                // for(const property in tests_json) {
+                //     if (!!tests_json[property].result) {
+                //         arguments.testsJson[property] = tests_json[property].result;
+                //     } else {
+                //         let argument = tests_json[property].args[0];
+                //         let getMemo = methodMapper.memo[argument];
+                //         if (getMemo != undefined) {
+                //             // console.log('Using memo :D - ' + argument);
+                //             arguments.testsJson[property] = getMemo;
+                //         } else {
+                //             let result = methodMapper.method(argument);
+                //             arguments.testsJson[property] = result;
+                //             methodMapper.memo[argument] = result;
+                //         }
+                //     }
+                // }
+                arguments.testsJson = Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => {
+                    return [key, value.result || methodMapper.method(value.args[0]) ];
+                }));
                 arguments.code = methodMapper.code;
                 attemptTask(arguments);
             } else {

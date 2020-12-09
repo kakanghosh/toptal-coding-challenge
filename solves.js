@@ -264,7 +264,7 @@ const methodMappers = {
         },
         code: '.',
         memo: {}
-    }
+    },
 }
 
 module.exports = methodMappers;
