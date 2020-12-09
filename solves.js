@@ -244,6 +244,26 @@ const methodMappers = {
         },
         code: '.',
         memo: {}
+    },
+    'Capitalize First Letters': {
+        method: (x) => {
+            let result = '';
+            let spaceFound = true;
+            for (let char in x) {
+                if (spaceFound) {
+                    result += x[char].toUpperCase();
+                    spaceFound = false;
+                } else if(x[char] == ' ') {
+                    result += x[char];
+                    spaceFound = true;
+                } else {
+                    result += x[char];
+                }
+            }
+            return result;
+        },
+        code: '.',
+        memo: {}
     }
 }
 
