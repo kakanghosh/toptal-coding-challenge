@@ -19,7 +19,8 @@ let ENTRY_ID = '';
 let ENTRY_KEY = '';
 const headers = {
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}; _ga=${GA}; _gid=${GID}; _fbp=${FBP}; _uetsid=${UETSID}; _uetvid=${UETVID}; __hstc=${HSTC}; hubspotutk=${HUBSPOTUTK}; hubspotutk=1; _gat_gtag_UA_153788370_1=1`,
+    // Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}; _ga=${GA}; _gid=${GID}; _fbp=${FBP}; _uetsid=${UETSID}; _uetvid=${UETVID}; __hstc=${HSTC}; hubspotutk=${HUBSPOTUTK}; hubspotutk=1; _gat_gtag_UA_153788370_1=1`,
+    Cookie: `__cfduid=${CFUUID}; PHPSESSID=${PHPSESSID}`,
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
@@ -48,7 +49,7 @@ async function attemptTask(args) {
             }
         })
         const { data } = response.data
-        //console.log(data.isSuccess);
+        // console.log(data.isSuccess);
         if (data.isSuccess && data.nextTask) {
             attemptTask(data);
         } else {
