@@ -1,5 +1,6 @@
 var http = require('http');
-const request = require('request');
+const axios = require('axios');
+const FormData = require('form-data')
 const methodMappers = require('./solves');
 
 const server = http.createServer(function (request, response) {}).listen(process.env.PORT || 8080);
@@ -31,39 +32,35 @@ let cachingResult = (methodMapper, arg) => {
     return result;
 }
 
-async function attemptTask(data) {
+async function attemptTask(args) {
     try {
-        const { tests_json } = data.nextTask;
-        const methodMapper = methodMappers[data.nextTask.slug];
-        const form = {
-            attempt_id: data.attemptId,
-            entry_key: ENTRY_KEY,
-            tests_json: JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.method(value.args[0])] ))),
-            code: methodMapper.code,
-        }
-        const options = {
-            url: `${BASE_URL}/webappApi/entry/${ENTRY_ID}/attemptTask`,
+        const { tests_json } = args.nextTask;
+        const methodMapper = methodMappers[args.nextTask.slug];
+        const form = new FormData();
+        form.append('attempt_id', args.attemptId);
+        form.append('entry_key', ENTRY_KEY);
+        form.append('tests_json', JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.method(value.args[0])] ))));
+        form.append('code', methodMapper.code);
+        const response = await axios.post(`${BASE_URL}/webappApi/entry/${ENTRY_ID}/attemptTask`, form, {
             headers: {
                 ...headers,
-            },
-            form,
-        };
-        request.post(options, (error, response, body) => {
-            const { data }  = JSON.parse(body);
-            // console.log(data.isSuccess)
-            if (data.isSuccess && data.nextTask) {
-                attemptTask(data);
-            } else {
-                console.log(data);
-                totalPoints.push(data.totalPoints);
-                if (attempCount++ < MAX_ATTEMP) {
-                    setTimeout(() => doIt(), 8000);
-                } else {
-                    server.close();
-                    console.log(totalPoints.sort(function(a, b){return a-b}));
-                }
+                ...form.getHeaders(),
             }
         })
+        const { data } = response.data
+        //console.log(data.isSuccess);
+        if (data.isSuccess && data.nextTask) {
+            attemptTask(data);
+        } else {
+            console.log(data);
+            totalPoints.push(data.totalPoints);
+            if (attempCount++ < MAX_ATTEMP) {
+                setTimeout(() => doIt(), 8000);
+            } else {
+                server.close();
+                console.log(totalPoints.sort(function(a, b){return a-b}));
+            }
+        }
     } catch(error) {
         console.error(error);
     }
@@ -71,25 +68,19 @@ async function attemptTask(data) {
 
 async function getEntryToken() {
     try {
-        const form = {
-            challengeSlug: 'toptal-js-2020',
-            email: '',
-            leaderboardName: 'Ghosh',
-            countryAlpha2: 'BD',
-        }
-        const options = {
-            url: `${BASE_URL}/webappApi/entry?ch=22&acc=1024`,
-            headers: {
-                ...headers,
-            },
-            form,
-          };
-        request.post(options, (error, response, body) => {
-            const { data } = JSON.parse(body);
-            ENTRY_ID = data.entry.id;
-            ENTRY_KEY = data.entry.entry_key;
-            attemptTask(data);
-        });
+        const form = new FormData();
+        form.append('challengeSlug', 'toptal-js-2020');
+        form.append('email', '');
+        form.append('leaderboardName', 'Ghosh');
+        form.append('countryAlpha2', 'BD');
+        const response = await axios.post(`${BASE_URL}/webappApi/entry?ch=22&acc=1024`,form, { headers: {
+            ...headers,
+            ...form.getHeaders(),
+        }})
+        const { data } = response.data;
+        ENTRY_ID = data.entry.id;
+        ENTRY_KEY = data.entry.entry_key;
+        attemptTask(data);
     } catch(error) {
         console.error(error);
     }
