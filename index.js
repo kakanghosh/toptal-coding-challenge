@@ -6,7 +6,7 @@ const server = http.createServer(function (request, response) {}).listen(process
 
 const BASE_URL = 'https://speedcoding.toptal.com';
 const CFUUID = 'd289ca26a1bb1adb0c9fd84e2545703231607442066';
-const PHPSESSID = 'b5e135403a45efc56bb7a6fda8952a11';
+const PHPSESSID = 'a1bfea77027f90e9a8b7f88cc7182106';
 const GA = 'GA1.2.915148913.1607442073';
 const GID = 'GA1.2.1912215665.1607442073';
 const FBP = 'fb.1.1607315228567.510057450';
@@ -50,7 +50,7 @@ async function attemptTask(data) {
         };
         request.post(options, (error, response, body) => {
             const { data }  = JSON.parse(body);
-            //console.log(data.isSuccess)
+         // console.log(data.isSuccess)
             if (data.isSuccess && data.nextTask) {
                 attemptTask(data);
             } else {
