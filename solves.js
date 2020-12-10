@@ -1,75 +1,75 @@
 const methodMappers = {
-    'Number To String': {
+    'numberToString': {
         method: (x) => {
             return x.toString()
         },
         code: `.`,
         memo: {},
     },
-    'Triple': {
+    'triple': {
         method: (x) => {
             return x * 3
         },
         code: `.`,
         memo: {},
     },
-    'Float To int': {
+    'floatToInt': {
         method: (x) => {
             return parseInt(x)
         },
         code: `.`,
         memo: {},
     },
-    'Is Odd': {
+    'isOdd': {
         method: (x) => {
             return x % 2 == 1
         },
         code: `.`,
         memo: {},
     },
-    'Square Root': {
+    'squareRoot': {
         method: (x) => {
             return Math.sqrt(x)
         },
         code: `.`,
         memo: {},
     },
-    'Surface Area of a Cube': {
+    'cubeSurfaceArea': {
         method: (x) => {
             return parseFloat((6 * x *x).toFixed(4))
         },
         code: `.`,
         memo: {},
     },
-    'String to Number': {
+    'stringToNumber': {
         method: (x) => {
             return parseFloat(x)
         },
         code: `.`,
         memo: {},
     },
-    'Remove first 3 elements on array': {
+    'removeFirstThree': {
         method: (x) => {
             return x.slice(3, x.length)
         },
         code: `.`,
         memo: {},
     },
-    'Odd Elements': {
+    'returnOddElements': {
         method: (x) => {
             return x.filter((a, i) => i % 2 == 0)
         },
         code: `.`,
         memo: {},
     },
-    'Double Index': {
+    'doubleIndex': {
         method: (x) => {
             return x.filter((a, i) => a == i * 2)
         },
         code: `.`,
         memo: {},
     },
-    'Only Vowels': {
+    'hasOnlyVowels': {
         method: (x) => {
             for(let c in x) {
                 let upperChar = x[c].toUpperCase();
@@ -84,7 +84,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Flatten2': {
+    'flatten': {
         method: (x) => {
             let res = []
             function cal(a) {
@@ -102,14 +102,14 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'SphereVolume': {
+    'sphereVolume': {
         method: (x) => {
             return parseFloat(((4/3) * Math.PI * x * x * x).toFixed(4))
         },
         code: `.`,
         memo: {},
     },
-    'Get File Extension': {
+    'getFileExtension': {
         method: (x) => {
             const sp = x.split('.')
             return sp.length > 1 ? sp[sp.length - 1] : ''
@@ -117,7 +117,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Invert Case': {
+    'invertCase': {
         method: (x) => {
             let res = '';
             for(let c in x) {
@@ -134,7 +134,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Sorting Type': {
+    'sortingType': {
         method: (x) => {
             let ascending = x[0] < x[1];
             let descending = !ascending;
@@ -149,7 +149,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Most Frequent': {
+    'mostFrequentItem': {
         method: (x) => {
             let freq = {}
             let freqDist;
@@ -171,7 +171,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Has Balance Points': {
+    'hasBalancePoint': {
         method: (x) => {
             if (x.length > 0) {
                 const y = []
@@ -193,7 +193,7 @@ const methodMappers = {
         code: `.`,
         memo: {},
     },
-    'Return the Rank of a Day in a Year': {
+    'dateRank': {
         method: (x) => {
             let initDate = new Date('12/31/2018')
             let date = new Date(x)
@@ -203,7 +203,7 @@ const methodMappers = {
         code: '.',
         memo: {},
     },
-    'Reverse String': {
+    'reverseString': {
         method: (x) => {
             let result = '';
             for(let i = x.length - 1; i >= 0; i--) {
@@ -214,7 +214,7 @@ const methodMappers = {
         code: '.',
         memo: {},
     },
-    'Swap Halves': {
+    'swapHalves': {
         method: (x) => {
             let firstHalf = '';
             let secondHalf = '';
@@ -230,7 +230,7 @@ const methodMappers = {
         code: '.',
         memo: {}
     },
-    'Longest String': {
+    'longestString': {
         method: (x) => {
             let longest = x[0];
             if (x.length > 1) {
@@ -245,7 +245,7 @@ const methodMappers = {
         code: '.',
         memo: {}
     },
-    'Capitalize First Letters': {
+    'capitalizeFirstLetters': {
         method: (x) => {
             let result = '';
             let spaceFound = true;
@@ -265,6 +265,26 @@ const methodMappers = {
         code: '.',
         memo: {}
     },
+    'convert_to_camel_case': {
+        method: (x) => {
+            let result = ''
+            let foundHyphenOrUnderScore = false;
+            for (let c in x) {
+                if (x[c] == '-' || x[c] == '_') {
+                    foundHyphenOrUnderScore = true
+                    continue
+                } else if (foundHyphenOrUnderScore) {
+                    foundHyphenOrUnderScore = false
+                    result += x[c].toUpperCase()
+                } else {
+                    result += x[c]
+                }
+            }
+            return result
+        },
+        code: '.',
+        memo: {}
+    }
 }
 
 module.exports = methodMappers;

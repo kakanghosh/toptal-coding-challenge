@@ -5,7 +5,7 @@ const methodMappers = require('./solves');
 const server = http.createServer(function (request, response) {}).listen(process.env.PORT || 8080);
 
 const BASE_URL = 'https://speedcoding.toptal.com';
-const CFUUID = 'd289ca26a1bb1adb0c9fd84e2545703231607442066';
+const CFUUID = 'de5661e7d4203f63ae08a5cb1371df3e31607592437';
 const PHPSESSID = 'a1bfea77027f90e9a8b7f88cc7182106';
 const GA = 'GA1.2.915148913.1607442073';
 const GID = 'GA1.2.1912215665.1607442073';
@@ -34,7 +34,7 @@ let cachingResult = (methodMapper, arg) => {
 async function attemptTask(data) {
     try {
         const { tests_json } = data.nextTask;
-        const methodMapper = methodMappers[data.nextTask.title];
+        const methodMapper = methodMappers[data.nextTask.slug];
         const form = {
             attempt_id: data.attemptId,
             entry_key: ENTRY_KEY,
@@ -50,7 +50,7 @@ async function attemptTask(data) {
         };
         request.post(options, (error, response, body) => {
             const { data }  = JSON.parse(body);
-         // console.log(data.isSuccess)
+            // console.log(data.isSuccess)
             if (data.isSuccess && data.nextTask) {
                 attemptTask(data);
             } else {
