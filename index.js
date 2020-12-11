@@ -8,11 +8,11 @@ const server = http.createServer(function (request, response) {}).listen(process
 const BASE_URL = 'https://speedcoding.toptal.com';
 const CFUUID = 'de5661e7d4203f63ae08a5cb1371df3e31607592437';
 const PHPSESSID = 'dd2a7f4b2ce151340d4f353e016ccdaa';
-const GA = 'GA1.2.915148913.1607442073';
-const GID = 'GA1.2.1912215665.1607442073';
+const GA = 'GA1.2.431038163.1607592443';
+const GID = 'GA1.2.1354439223.1607592443';
 const FBP = 'fb.1.1607315228567.510057450';
-const UETSID = 'a4507bc03a1911eb97150f8c3f5e2870';
-const UETVID = 'a4512fe03a1911ebb1eadd59204db704';
+const UETSID = 'e894e7203ac911ebb88d6d05b1529cef';
+const UETVID = 'e895cba03ac911ebb2eeb3ffd8a1f421';
 const HUBSPOTUTK = '7aa63578239fb01ed3be31efcb34bfa5';
 const HSTC = '6380845.7aa63578239fb01ed3be31efcb34bfa5.1607315231772.1607315231772.1607315231772.1';
 let ENTRY_ID = '';
@@ -24,7 +24,7 @@ const headers = {
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
-let MAX_ATTEMP = 25 * 4;
+let MAX_ATTEMP = 25 * 0;
 const totalPoints = [];
 
 let cachingResult = (methodMapper, arg) => {
@@ -35,6 +35,7 @@ let cachingResult = (methodMapper, arg) => {
 
 async function attemptTask(args) {
     try {
+        //console.time('time')
         const { tests_json } = args.nextTask;
         const methodMapper = methodMappers[args.nextTask.slug];
         const form = new FormData();
@@ -51,6 +52,9 @@ async function attemptTask(args) {
         const { data } = response.data
         // console.log(data.isSuccess);
         if (data.isSuccess && data.nextTask) {
+            //console.log(args.nextTask.slug);
+            //console.timeEnd('time')
+            //console.log('');
             attemptTask(data);
         } else {
             console.log(data);

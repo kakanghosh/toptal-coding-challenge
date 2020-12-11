@@ -1,7 +1,7 @@
 const methodMappers = {
     'numberToString': {
         method: (x) => {
-            return x.toString()
+            return `${x}`
         },
         code: `.`,
         memo: {},
@@ -36,7 +36,7 @@ const methodMappers = {
     },
     'cubeSurfaceArea': {
         method: (x) => {
-            return parseFloat((6 * x *x).toFixed(4))
+            return parseFloat((6 * x * x).toFixed(4))
         },
         code: `.`,
         memo: {},
@@ -50,21 +50,39 @@ const methodMappers = {
     },
     'removeFirstThree': {
         method: (x) => {
-            return x.slice(3, x.length)
+            const result = []
+            for (let i in x) {
+                if (i >= 3) {
+                    result.push(x[i])
+                }
+            }
+            return result
         },
         code: `.`,
         memo: {},
     },
     'returnOddElements': {
         method: (x) => {
-            return x.filter((a, i) => i % 2 == 0)
+            const result = []
+            for (let i in x) {
+                if (i % 2 == 0) {
+                    result.push(x[i])
+                }
+            }
+            return result
         },
         code: `.`,
         memo: {},
     },
     'doubleIndex': {
         method: (x) => {
-            return x.filter((a, i) => a == i * 2)
+            const result = []
+            for (let i in x) {
+                if (x[i] == i * 2) {
+                    result.push(x[i])
+                }
+            }
+            return result
         },
         code: `.`,
         memo: {},
