@@ -321,7 +321,28 @@ const methodMappers = {
         },
         code: '.',
         memo: {}
-    }
+    },
+    'primeFactors': {
+        method: (x) => {
+            let primeFactors = []
+            while(x % 2 == 0) {
+                primeFactors.push(2)
+                x /= 2
+            }
+            for (let i  = 3; i <= Math.sqrt(x); i += 2) {
+                while(x % i == 0) {
+                    primeFactors.push(i)
+                    x /= i
+                }
+            }
+            if (x > 2) {
+                primeFactors.push(x)
+            }
+            return primeFactors
+        },
+        code: '.',
+        memo: {}
+    },
 }
 
 module.exports = methodMappers;
