@@ -287,19 +287,19 @@ const methodMappers = {
     },
     'isBalanced': {
         method: (x) => {
-            const stack = []
+            const openingParamCount = 0
             for (let c in x) {
                 if (x[c] == '(') {
-                    stack.push(x[c]);
+                    openingParamCount++
                 } else if (x[c] == ')') {
-                    if (stack.length > 0) {
-                        stack.splice(-1, 1);
+                    if (openingParamCount > 0) {
+                        openingParamCount--
                     } else {
                         return false
                     }
                 }
             }
-            return stack.length == 0
+            return openingParamCount == 0
         },
         code: '.',
         memo: {}
