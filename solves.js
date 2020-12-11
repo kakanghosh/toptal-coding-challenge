@@ -287,7 +287,7 @@ const methodMappers = {
     },
     'isBalanced': {
         method: (x) => {
-            const openingParamCount = 0
+            let openingParamCount = 0
             for (let c in x) {
                 if (x[c] == '(') {
                     openingParamCount++
