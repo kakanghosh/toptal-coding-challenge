@@ -24,7 +24,7 @@ const headers = {
     accept: 'application/json, text/javascript, */*; q=0.01', 
 }
 let attempCount = 0;
-let MAX_ATTEMP = 25 * 0;
+let MAX_ATTEMP = 25 * 4;
 const totalPoints = [];
 
 let cachingResult = (methodMapper, arg) => {
