@@ -284,6 +284,25 @@ const methodMappers = {
         },
         code: '.',
         memo: {}
+    },
+    'isBalanced': {
+        method: (x) => {
+            const stack = []
+            for (let c in x) {
+                if (x[c] == '(') {
+                    stack.push(x[c]);
+                } else if (x[c] == ')') {
+                    if (stack.length > 0) {
+                        stack.splice(-1, 1);
+                    } else {
+                        return false
+                    }
+                }
+            }
+            return stack.length == 0
+        },
+        code: '.',
+        memo: {}
     }
 }
 
