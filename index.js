@@ -41,7 +41,7 @@ async function attemptTask(args) {
         const form = new FormData();
         form.append('attempt_id', args.attemptId);
         form.append('entry_key', ENTRY_KEY);
-        form.append('tests_json', JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.memo[value.args[0]] || cachingResult(methodMapper, value.args[0]) ] ))));
+        form.append('tests_json', JSON.stringify(Object.fromEntries(Object.entries(tests_json).map( ([key, value]) => [key, value.result || methodMapper.method(value.args[0]) ] ))));
         form.append('code', methodMapper.code);
         const response = await axios.post(`${BASE_URL}/webappApi/entry/${ENTRY_ID}/attemptTask`, form, {
             headers: {
@@ -57,7 +57,7 @@ async function attemptTask(args) {
             //console.log('');
             attemptTask(data);
         } else {
-            console.log(data.totalPoints);
+            console.log(`Total Points: ${data.totalPoints}`);
             totalPoints.push(data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => doIt(), 8000);
