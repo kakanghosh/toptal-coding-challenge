@@ -57,7 +57,7 @@ async function attemptTask(args) {
             //console.log('');
             attemptTask(data);
         } else {
-            console.log(data);
+            console.log(data.totalPoints);
             totalPoints.push(data.totalPoints);
             if (attempCount++ < MAX_ATTEMP) {
                 setTimeout(() => doIt(), 8000);
