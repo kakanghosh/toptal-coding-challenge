@@ -361,11 +361,12 @@ const methodMappers = {
                     occuranceMapReverse[occuranceMap[i]] = 1;
                 }
             }
-            if (Object.keys(occuranceMapReverse).length > 2) {
+            let lenCount = Object.keys(occuranceMapReverse).length;
+            if ( lenCount > 2) {
                 return false;
-            } else if (Object.keys(occuranceMapReverse).length == 1) {
+            } else if (lenCount == 1) {
                 return true;
-            } else if (Object.keys(occuranceMapReverse).length == 2) {
+            } else if (lenCount == 2) {
                 const [first, second] = Object.keys(occuranceMapReverse);
                 const smaller = occuranceMapReverse[first] > occuranceMapReverse[second] ? second : first;
                 const greater = occuranceMapReverse[first] > occuranceMapReverse[second] ? first : second;
