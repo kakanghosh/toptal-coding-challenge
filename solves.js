@@ -343,6 +343,38 @@ const methodMappers = {
         code: '.',
         memo: {}
     },
+    'occurrenceCheck': {
+        method: (x) => {
+            const occuranceMap = {};
+            const occuranceMapReverse = {};
+            for(let i in x) {
+                if (!!occuranceMap[x[i]]) {
+                    occuranceMap[x[i]] += 1;
+                } else {
+                    occuranceMap[x[i]] = 1;
+                }
+            }
+            for (let i in occuranceMap) {
+                if(!!occuranceMapReverse[occuranceMap[i]]) {
+                    occuranceMapReverse[occuranceMap[i]] += 1;
+                } else {
+                    occuranceMapReverse[occuranceMap[i]] = 1;
+                }
+            }
+            if (Object.keys(occuranceMapReverse).length > 2) {
+                return false;
+            } else if (Object.keys(occuranceMapReverse).length == 1) {
+                return true;
+            } else if (Object.keys(occuranceMapReverse).length == 2) {
+                const [first, second] = Object.keys(occuranceMapReverse);
+                const smaller = occuranceMapReverse[first] > occuranceMapReverse[second] ? second : first;
+                const greater = occuranceMapReverse[first] > occuranceMapReverse[second] ? first : second;
+                return occuranceMapReverse[smaller] == 1 && (smaller - 1 == 0 || smaller - 1 == greater);
+            }
+        },
+        code: '.',
+        memo: {},
+    },
 }
 
 module.exports = methodMappers;

@@ -6,8 +6,8 @@ const methodMappers = require('./solves');
 const server = http.createServer(function (request, response) {}).listen(process.env.PORT || 8080);
 
 const BASE_URL = 'https://speedcoding.toptal.com';
-const CFUUID = 'de5661e7d4203f63ae08a5cb1371df3e31607592437';
-const PHPSESSID = '5041f31a20fcad8f005f0cd0850555a5';
+const CFUUID = 'd24ade80240c5dea422e4deb0f5dd337b1607785339';
+const PHPSESSID = 'e88ff9278ef8d6c30c66873b7d996ecd';
 const GA = 'GA1.2.431038163.1607592443';
 const GID = 'GA1.2.1354439223.1607592443';
 const FBP = 'fb.1.1607315228567.510057450';
