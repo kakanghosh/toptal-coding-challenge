@@ -38,10 +38,6 @@ async function attemptTask(args) {
         //console.time('time')
         const { tests_json } = args.nextTask;
         const methodMapper = methodMappers[args.nextTask.slug];
-        if (!methodMapper) {
-            console.log(args);
-            return
-        }
         const form = new FormData();
         form.append('attempt_id', args.attemptId);
         form.append('entry_key', ENTRY_KEY);
@@ -54,7 +50,7 @@ async function attemptTask(args) {
             }
         })
         const { data } = response.data
-        console.log(data.isSuccess);
+        // console.log(data.isSuccess);
         if (data.isSuccess && data.nextTask) {
             //console.log(args.nextTask.slug);
             //console.timeEnd('time')

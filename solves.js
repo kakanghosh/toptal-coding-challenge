@@ -378,8 +378,9 @@ const methodMappers = {
     },
     'sumDigits': {
         method: (x) => {
-            return x.split('')
-            .filter((a, i) => x.charCodeAt(i) >= 48 && x.charCodeAt(i) <= 57)
+            const input = x.toString()
+            return input.toString().split('')
+            .filter((a, i) => input.charCodeAt(i) >= 48 && input.charCodeAt(i) <= 57)
             .reduce((total, a) => parseInt(a) + total, 0)
         },
         code: '.',
