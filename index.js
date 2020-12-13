@@ -7,7 +7,7 @@ const server = http.createServer(function (request, response) {}).listen(process
 
 const BASE_URL = 'https://speedcoding.toptal.com';
 const CFUUID = 'd24ade80240c5dea422e4deb0f5dd337b1607785339';
-const PHPSESSID = 'e88ff9278ef8d6c30c66873b7d996ecd';
+const PHPSESSID = '7ef21b94a9628df912f1c5e21cd1d6fe';
 const GA = 'GA1.2.431038163.1607592443';
 const GID = 'GA1.2.1354439223.1607592443';
 const FBP = 'fb.1.1607315228567.510057450';
