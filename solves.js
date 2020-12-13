@@ -376,6 +376,15 @@ const methodMappers = {
         code: '.',
         memo: {},
     },
+    'sumDigits': {
+        method: (x) => {
+            return x.split('')
+            .filter((a, i) => x.charCodeAt(i) >= 48 && x.charCodeAt(i) <= 57)
+            .reduce((total, a) => parseInt(a) + total, 0)
+        },
+        code: '.',
+        memo: {},
+    },
 }
 
 module.exports = methodMappers;
